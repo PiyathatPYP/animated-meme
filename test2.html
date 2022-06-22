@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"></script>
+    
+</head>
+
+<py-env>
+    - pandas
+</py-env>
+
+<body>
+    
+    <h1>Read CSV with Pandas using PyScript</h1>
+
+    <p id="csv"></p>
+
+    <py-script>
+
+import pandas as pd 
+
+from pyodide.http import open_url
+
+gsheetid = "1-1jbgiAfNkhUyPpUazLP_hqVxaPLBbgaLoozS07LPj4"
+sheet_name = "Data"
+URL = 'https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}'.format(
+	gsheetid,
+	sheet_name
+)
+
+url_content=URL
+
+
+df = pd.read_csv(open_url(url_content))
+
+#print(df)
+     
+csv = Element('csv')
+
+csv.write(df)
+
+    </py-script>
+
+</body>
+
+</html>
